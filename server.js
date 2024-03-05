@@ -30,6 +30,14 @@ const initApp = () => {
         .then((dictionary) => {
             const app = express();
             app.use((req, res, next) => {
+                // Allow requests from any origin
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                // Allow specific HTTP methods
+                res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+                // Allow specific HTTP headers
+                res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+                // Allow credentials (if needed)
+                res.setHeader('Access-Control-Allow-Credentials', 'true');
                 req.dictionary = dictionary;
                 next();
             });
