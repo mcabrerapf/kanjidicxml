@@ -1,18 +1,19 @@
-var parser = require('xml2json');
-const readGzFile = require('./readGzFile');
+// var parser = require('xml2json');
+// const readGzFile = require('./readGzFile');
 
 const parseJMdict = async () => {
     try {
-        var data = await readGzFile('../../data/JMdict_e.gz')
-            .then(res=> {
-                return JSON.parse(parser.toJson(res))
-            }) 
-            .catch(err=> {
-                console.log(err)
-                return null;
-            })
+        return [];
+        // var data = await readGzFile('../../data/JMdict_e.gz')
+        //     .then(res=> {
+        //         return JSON.parse(parser.toJson(res))
+        //     }) 
+        //     .catch(err=> {
+        //         console.log(err)
+        //         return null;
+        //     })
 
-        return data?.JMdict?.entry || [];
+        // return data?.JMdict?.entry || [];
 
     } catch (error) {
         console.log(error)
