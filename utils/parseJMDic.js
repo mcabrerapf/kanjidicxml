@@ -3,7 +3,7 @@ const readGzFile = require('./readGzFile');
 
 const parseJMdict = async () => {
     try {
-        var decompressedData = await readGzFile('../../data/JMdict_e.gz')
+        var data = await readGzFile('../../data/JMdict_e.gz')
             .then(res=> {
                 return JSON.parse(parser.toJson(res))
             }) 
@@ -12,7 +12,7 @@ const parseJMdict = async () => {
                 return null;
             })
 
-        return decompressedData?.JMdict?.entry || [];
+        return data?.JMdict?.entry || [];
 
     } catch (error) {
         console.log(error)
