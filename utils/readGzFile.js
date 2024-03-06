@@ -1,7 +1,6 @@
 const fs = require('fs');
 const zlib = require('zlib');
 const path = require('path');  
-var parser = require('xml2json');
 
 const readGzFile = (filePath) => {
     return new Promise((resolve, reject) => {
@@ -24,7 +23,7 @@ const readGzFile = (filePath) => {
     
         // Handle end of file
         decompressionStream.on('end', () => {
-            resolve(JSON.parse(parser.toJson(decompressedData)));
+            resolve(decompressedData);
         });
     });
 }

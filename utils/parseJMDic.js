@@ -1,13 +1,18 @@
-// const fastXmlParser = require('fast-xml-parser');
-// var parser = require('xml2json');
+var parser = require('xml2json');
 const readGzFile = require('./readGzFile');
 
 const parseJMdict = async () => {
     try {
-        var decompressedData = await readGzFile('../../data/JMdict.gz'); 
-        // var json = parser.toJson(decompressedData);
-        // return decompressedData;
-        return decompressedData?.JMdict?.entry || []
+        var decompressedData = await readGzFile('../../data/JMdict_e.gz')
+            .then(res=> {
+                return JSON.parse(parser.toJson(res))
+            }) 
+            .catch(err=> {
+                console.log(err)
+                return null;
+            })
+
+        return decompressedData?.JMdict?.entry || [];
 
     } catch (error) {
         console.log(error)
