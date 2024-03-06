@@ -62,15 +62,15 @@ const parseJMdict = async ()=> {
 }
 
 const initApp = async () => {
-    const jmDict = await parseJMdict()
-        .then((res)=> {
-            return res
-        })
-        .catch((error) => {
-            console.error('Error parsing JMdic:', error);
-            return [];
-        });
-    console.log(jmDict[0]);
+    // const jmDict = await parseJMdict()
+    //     .then((res)=> {
+    //         return res
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error parsing JMdic:', error);
+    //         return [];
+    //     });
+    
     const kanjiDic = await parseDic()
         .then((dictionary) => {
             return dictionary
@@ -79,7 +79,7 @@ const initApp = async () => {
             console.error('Error parsing dictionary:', error);
             return []
         });
-    console.log(kanjiDic[0]);
+
     const app = express();
     app.use((req, res, next) => {
         // Allow requests from any origin
@@ -90,14 +90,14 @@ const initApp = async () => {
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         // Allow credentials (if needed)
         res.setHeader('Access-Control-Allow-Credentials', 'true');
-        req.dictionary = jmDict;
+        req.dictionary = [];
         req.kanjiDictionary = kanjiDic
         next();
     });
     app.use('/words', wordsRoute);
     app.use('/kanjis', kanjisRoute);
     app.get('/', (req, res) => {
-        res.send(jmDict[500]);
+        res.send('ONLINE');
     });
     app.listen(port, () => {
         console.log(`Node.js HTTP server is running on port ${port}`);
