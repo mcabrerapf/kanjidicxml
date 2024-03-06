@@ -4,15 +4,12 @@ const router = express.Router();
 const getDicMatch = (word = '', dic = []) =>  {
     return dic
         .find((dicWord) => {
-            const rElements = dicWord?.r_ele || [];
-            const kElements = dicWord?.k_ele || [];
-
-            const hasRmatch = Array.isArray(rElements) ? 
-                !!rElements.find(rEle=> rEle?.reb === word) 
-                : rElements?.reb  === word
-            const hasKmatch = Array.isArray(kElements) ? 
-                !!kElements.find(rEle=> rEle?.keb === word) 
-                : rElements?.keb  === word
+            const hasRmatch = Array.isArray(dicWord?.r_ele) ? 
+                !!dicWord?.r_ele.find(rEle=> rEle?.reb === word) 
+                : dicWord?.r_ele?.reb  === word
+            const hasKmatch = Array.isArray(dicWord?.k_ele) ? 
+                !!dicWord?.k_ele.find(rEle=> rEle?.keb === word) 
+                : dicWord?.k_ele?.keb  === word
 
             return !!hasKmatch || hasRmatch;
         }) || {};
@@ -23,9 +20,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const match = getDicMatch(id, req.dictionary)
-    console.log({id, match})
+    const match = getDicMatch(req.params.id, req.dictionary)
+    console.log({match})
     res.send(match);
 });
 

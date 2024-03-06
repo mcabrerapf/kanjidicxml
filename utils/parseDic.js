@@ -3,13 +3,13 @@ const readXmlFile = require('./readXmlFile');
 
 
 const parseDic = async () => {
-    const data = await readXmlFile('../../data/kanjidic.xml')
-    const parser = new fastXmlParser.XMLParser({
+    var data = await readXmlFile('../../data/kanjidic.xml')
+    var parser = new fastXmlParser.XMLParser({
         ignoreAttributes: false,
         attributeNamePrefix: '@_a_',
     });
-    const parsedData = parser.parse(data);
-     return parsedData?.kanjidic2?.character || [];
+    return parser.parse(data)?.kanjidic2?.character || [];
+    
 };
 
 module.exports = parseDic;

@@ -4,11 +4,10 @@ const readGzFile = require('./readGzFile');
 
 const parseJMdict = async () => {
     try {
-        const decompressedData = await readGzFile('../../data/JMdict.gz'); 
+        var decompressedData = await readGzFile('../../data/JMdict.gz'); 
         var json = parser.toJson(decompressedData);
-        const parsedData = JSON.parse(json)
+        return JSON.parse(json)?.JMdict?.entry || []
 
-        return parsedData?.JMdict?.entry || [];
     } catch (error) {
         console.log(error)
         return [];
