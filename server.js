@@ -2,14 +2,14 @@ const express = require('express');
 const kanjisRoute = require('./routes/kanjis');
 const wordsRoute = require('./routes/words');
 const jishoRoute = require('./routes/jisho');
-const parseDic = require('./utils/parseDic');
-const parseJMDic = require('./utils/parseJMDic');
+// const parseDic = require('./utils/parseDic');
+// const parseJMDic = require('./utils/parseJMDic');
 
 const port = process.env.PORT || 3000;
 
 const initApp = async () => {
-    const kanjiDic = await parseDic();
-    const jmDic = await parseJMDic();
+    // const kanjiDic = await parseDic();
+    // const jmDic = await parseJMDic();
 
     const app = express();
     app.use((req, res, next) => {
@@ -21,12 +21,12 @@ const initApp = async () => {
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         // Allow credentials (if needed)
         res.setHeader('Access-Control-Allow-Credentials', 'true');
-        req.dictionary = jmDic;
-        req.kanjiDictionary = kanjiDic
+        // req.dictionary = jmDic;
+        // req.kanjiDictionary = kanjiDic
         next();
     });
-    app.use('/words', wordsRoute);
-    app.use('/kanjis', kanjisRoute);
+    // app.use('/words', wordsRoute);
+    // app.use('/kanjis', kanjisRoute);
     app.use('/jisho', jishoRoute);
     app.get('/', (req, res) => {
         res.send('ONLINE');
