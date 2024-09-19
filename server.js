@@ -1,6 +1,7 @@
 const express = require('express');
 const kanjisRoute = require('./routes/kanjis');
 const wordsRoute = require('./routes/words');
+const jishoRoute = require('./routes/jisho');
 const parseDic = require('./utils/parseDic');
 const parseJMDic = require('./utils/parseJMDic');
 
@@ -26,6 +27,7 @@ const initApp = async () => {
     });
     app.use('/words', wordsRoute);
     app.use('/kanjis', kanjisRoute);
+    app.use('/jisho', jishoRoute);
     app.get('/', (req, res) => {
         res.send('ONLINE');
     });
