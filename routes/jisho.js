@@ -26,8 +26,9 @@ const iterateOverMeanings = (container, arr, $) => {
             }
        
         })
-
+        const id = `${jp}-${furi.join('-')}-${_}`
         arr.push({
+            id: id,
             jp,
             furi,
             meanings
