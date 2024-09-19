@@ -1,6 +1,6 @@
 const express = require('express');
-const kanjisRoute = require('./routes/kanjis');
-const wordsRoute = require('./routes/words');
+// const kanjisRoute = require('./routes/kanjis');
+// const wordsRoute = require('./routes/words');
 const jishoRoute = require('./routes/jisho');
 // const parseDic = require('./utils/parseDic');
 // const parseJMDic = require('./utils/parseJMDic');
