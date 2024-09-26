@@ -1,40 +1,7 @@
 const express = require('express');
 const cheerio = require('cheerio');
 const router = express.Router();
-
-const iterateOverMeanings = (container, arr, $) => {
-    if(!container) return;
-    container.each((_,pMeaning)=> {
-        const jp = $(pMeaning).find('span.text').text().trim()
-        const furi = [];
-        const meanings = [];
-        const meaningsWrapperChildren = $(pMeaning).find('div.meanings-wrapper').children('div')
-        const furiSpan = $(pMeaning).find('span.furigana').first('span').children('span')
-        furiSpan.each((_, iFuri)=> {
-            const furiTex = $(iFuri).text();
-            furi.push(furiTex)
-        })
-        meaningsWrapperChildren.each((_, mChild)=> {
-            const meaningWrapper = $(mChild);
-            if(meaningWrapper.hasClass('meaning-wrapper')) {
-                const previous = meaningWrapper.prev();
-                const prevIsTag = previous.hasClass('meaning-tags');
-                const meaingType = prevIsTag ? previous.text():null;
-                const definition = meaningWrapper.children('div').first('div');
-                const  meaningText = definition.children('span').first('span').next().text();
-                if(meaningText && meaingType !== 'Wikipedia definition') meanings.push([meaingType,meaningText])
-            }
-       
-        })
-        const id = `${jp}-${furi.join('-')}-${_}`
-        arr.push({
-            id: id,
-            jp,
-            furi,
-            meanings
-        })
-    })
-}
+const iterateOverMeanings = require('../utils/iterateOverMeanings');
 
 router.get('/', (req, res) => {
     res.send('this is jisho route');
