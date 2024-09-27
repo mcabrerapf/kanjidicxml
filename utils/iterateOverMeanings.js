@@ -20,9 +20,11 @@ const iterateOverMeanings = (container, arr, $) => {
                 const meaingType = prevIsTag ? previous.text() : null;
                 const definition = meaningWrapper.children('div.meaning-definition').first('div');
                 const meaningsArray = [];
+            
                 definition.children('span').each((__,meanMean)=> {
                     const meaning = $(meanMean);
                     if(meaning.hasClass('meaning-definition-section_divider')) return;
+                    if(meaning.children('span').hasClass('sense-tag tag-see_also')) return;
                     meaningsArray.push(meaning.text());
                 });
                 if(!meaningsArray.length || meaingType === 'Wikipedia definition') return;
