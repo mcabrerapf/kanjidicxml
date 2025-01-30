@@ -2,6 +2,7 @@ const express = require('express');
 const cheerio = require('cheerio');
 const router = express.Router();
 const iterateOverMeanings = require('../utils/iterateOverMeanings');
+const parseMoveCommand = require('../utils/parseMoveCommand');
 
 router.get('/', (req, res) => {
     res.send('this is jisho route');
@@ -41,8 +42,8 @@ router.get('/word/:id', async (req, res) => {
             const primaryMeaings = $('div.exact_block').children('div');
             const secondaryMeanings = $('div.concepts').children('div');
             const en = [];
-           iterateOverMeanings(primaryMeaings, en, $);
-           iterateOverMeanings(secondaryMeanings, en, $);
+            iterateOverMeanings(primaryMeaings, en, $);
+            iterateOverMeanings(secondaryMeanings, en, $);
             res.send(en);
         })
         .catch((err) => console.log(err));
