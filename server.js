@@ -29,7 +29,7 @@ const initApp = async () => {
     // app.use('/words', wordsRoute);
     // app.use('/kanjis', kanjisRoute);
     app.use('/jisho', jishoRoute);
-    app.use('/vf', vfRoute);
+    app.use('/vf5-revo', vfRoute);
     app.get('/', (req, res) => {
         res.send('ONLINE');
     });

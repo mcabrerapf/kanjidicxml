@@ -12,7 +12,6 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const match = getDicMatch(req.params.id, req.kanjiDictionary)
-    console.log({match})
     res.send(match);
 });
 

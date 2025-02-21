@@ -2,7 +2,6 @@ const express = require('express');
 const cheerio = require('cheerio');
 const router = express.Router();
 const iterateOverMeanings = require('../utils/iterateOverMeanings');
-const parseMoveCommand = require('../utils/parseMoveCommand');
 
 router.get('/', (req, res) => {
     res.send('this is jisho route');
