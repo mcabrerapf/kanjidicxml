@@ -16,9 +16,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/send', async (req, res) => {
-  const { email, subject = 'Subject of the email', message = "Message stuff" } = req.body || {};
-  
-  if (!email || !subject || !message) {
+  const {
+    firstName,
+    lastName,
+    email,
+    subject = 'Subject of the email',
+    message = "Message stuff"
+  } = req.body || {};
+
+  if (!firstName || !lastName || !email || !subject || !message) {
     return res.status(400).json({
       success: false,
       message: 'Missing required fields'
@@ -30,7 +36,11 @@ router.post('/send', async (req, res) => {
       from: email,
       to: process.env.EMAIL_USER,
       subject: subject,
-      text: `From: ${email} ${message}`,
+      text: `
+      From: ${firstName} ${lastName} \n
+      Email: ${email} \n 
+      ${message}
+      `,
     });
 
     res.json({ success: true, message: "Email sent successfully!" });
