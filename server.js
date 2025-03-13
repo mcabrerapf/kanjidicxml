@@ -14,6 +14,7 @@ const initApp = async () => {
     // const jmDic = await parseJMDic();
 
     const app = express();
+    app.use(express.json()); 
     app.use((req, res, next) => {
         // Allow requests from any origin
         res.setHeader('Access-Control-Allow-Origin', '*');
