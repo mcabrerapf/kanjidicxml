@@ -3,6 +3,7 @@ const express = require('express');
 // const wordsRoute = require('./routes/words');
 const jishoRoute = require('./routes/jisho');
 const vfRoute = require('./routes/vf');
+const email = require('./routes/email');
 // const parseDic = require('./utils/parseDic');
 // const parseJMDic = require('./utils/parseJMDic');
 
@@ -30,6 +31,7 @@ const initApp = async () => {
     // app.use('/kanjis', kanjisRoute);
     app.use('/jisho', jishoRoute);
     app.use('/vf5-revo', vfRoute);
+    app.use('/email', email);
     app.get('/', (req, res) => {
         res.send('ONLINE');
     });
